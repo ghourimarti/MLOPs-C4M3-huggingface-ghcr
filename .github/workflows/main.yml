@@ -44,3 +44,14 @@ jobs:
           docker push $IMAGE_URI
 
       # Optional: Deploy to ECS or EC2 here (let me know if you want help)
+      - name: Fill in the new image URI in the ECS task definition
+        run: |
+          sed "s|<IMAGE_URI>|${{ env.ECR_IMAGE }}|g" ecs-task-def.json > task-def-updated.json
+
+      - name: Deploy to Amazon ECS
+        uses: aws-actions/amazon-ecs-deploy-task-definition@v1
+        with:
+          task-definition: task-def-updated.json
+          service: ${{ secrets.ECS_SERVICE_NAME }}
+          cluster: ${{ secrets.ECS_CLUSTER_NAME }}
+          wait-for-service-stability: true
