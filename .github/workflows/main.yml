@@ -32,7 +32,7 @@ jobs:
         env:
           AWS_ACCOUNT_ID: ${{ secrets.AWS_ACCOUNT_ID }}
           AWS_REGION: us-east-1  # ✅ Replace with your region
-          REPOSITORY: my-ecr-repo  # ✅ Replaces with your ECR repo name
+          REPOSITORY: ${{ secrets.ECR_REPOSITORY }}  # ✅ Replace with your ECR repo name
           IMAGE_TAG: latest
         run: |
           IMAGE_URI=$AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$REPOSITORY:$IMAGE_TAG
