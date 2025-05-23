@@ -1,0 +1,14 @@
+FROM python:3.13-slim
+
+COPY ./requirements.txt /webapp/requirements.txt
+
+WORKDIR /webapp
+
+RUN py -m pip install --upgrade pip && \
+    pip install -r requirements.txt
+
+COPY ./webapp /webapp
+
+ENTRYPOINT [ "uvicorn" ]
+
+CMD [ "--host", "0.0.0.0", "main:app" ]

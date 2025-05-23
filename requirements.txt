@@ -1,4 +1,11 @@
-transformers==4.20.1
-tensorflow==2.9.1
-fastapi==0.78.0
+transformers
+tensorflow-cpu
+torch
+torchvision
+torchtext
+fastapi
+chardet
+charset_normalizer
+tf-keras
 uvicorn[standard]
+huggingface_hub[hf_xet]

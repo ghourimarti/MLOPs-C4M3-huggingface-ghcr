@@ -1,13 +1,12 @@
-FROM python:3.8
-
-COPY ./requirements.txt /webapp/requirements.txt
+FROM python:3.10-slim
 
 WORKDIR /webapp
 
-RUN pip install -r requirements.txt
+COPY ./requirements.txt .
 
-COPY webapp/* /webapp
+RUN python -m pip install --upgrade pip && \
+    pip install -r requirements.txt
 
-ENTRYPOINT [ "uvicorn" ]
+COPY ./webapp /webapp
 
-CMD [ "--host", "0.0.0.0", "main:app" ]
+CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
