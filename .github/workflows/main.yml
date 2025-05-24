@@ -43,7 +43,7 @@ jobs:
           echo "Pushing image to ECR..."
           docker push $IMAGE_URI
 
-      # Optional: Deploy to ECS or EC2 here (let me know if you want help)
+      # Optional: Deploy to ECS or EC2 here (let me know if you want helps)
       - name: Fill in the new image URI in the ECS task definition
         run: |
           sed "s|<IMAGE_URI>|${{ env.ECR_IMAGE }}|g" ecs-task-def.json > task-def-updated.json
